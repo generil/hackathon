@@ -54,7 +54,6 @@ def sign_up(request):
             	email = data['email'])
             
             user = authenticate(username = data['username'], password = data['password1'])
-            print user
             login(request, user)
             
             return redirect('home')
@@ -62,7 +61,7 @@ def sign_up(request):
         else:
             context = dataCheck[1]
 
-    return render(request, 'edit_profile.html', context=context)
+    return render(request, 'register.html', context=context)
 
 
 def user_integrityCheck(data):
