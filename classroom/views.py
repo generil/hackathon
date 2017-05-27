@@ -12,46 +12,68 @@ from .models import Forum_Post
 from .models import Topic_PostComment
 from .models import Forum_PostComment
 from .models import Record
+from registration.models import Person
 
 # Create your views here.
 
 def forum(request, pk):
 	classroom = get_object_or_404(Classroom, pk=pk)
 	posts = Forum_Post.objects.filter(classroom=classroom)
+	records = Record.objects.filter(user=request.user)
+	person = Person.objects.get(id = request.user.id)
 	context = {
 		'classroom': classroom,
-		'posts': posts
+		'posts': posts,
+		'records': records,
+		'person': person
 	}
 	return render(request, 'classroom/forum.html', context=context)
 
 
 def topic(request, pk):
+	if not request.user.is_authenticated:
+		return redirect('/')
+
 	classroom = get_object_or_404(Classroom, pk=pk)
 	topics = Topic.objects.filter(classroom=classroom)
+	records = Record.objects.filter(user=request.user)
+	person = Person.objects.get(id = request.user.id)
 	context = {
 		'topics': topics,
-		'classroom': classroom
+		'classroom': classroom,
+		'records': records,
+		'person': person
 	}
 	return render(request, 'classroom/topics.html', context=context)
 
 
 def add_classroom(request):
+	if not request.user.is_authenticated:
+		return redirect('/')
+
 	if request.method == "POST":
 		name = request.POST.get('name')
 		c = Classroom.objects.create(name=name, creator=request.user)
 		Record.objects.create(user=request.user, classroom=c)
 		c.save()
-		return redirect(reverse('forum', kwargs={'pk': c.pk}))
+		return redirect(reverse('classroom:forum', kwargs={'pk': c.pk}))
 
-	return render(request, 'classroom/add_classroom.html', context=context)
+	return redirect('/')
 
 
 def add_topic(request, pk):
+	if not request.user.is_authenticated:
+		return redirect('/')
+
 	classroom = get_object_or_404(Classroom, pk=pk)
 	topics = Topic.objects.filter(classroom=classroom)
+	records = Record.objects.filter(user=request.user)
+	person = Person.objects.get(id = request.user.id)
 	context = {
 		'classroom': classroom,
-		'topics': topics
+		'topics': topics,
+		'records': records,
+		'person': person
 	}
 
 	if request.method == 'POST':
@@ -63,6 +85,9 @@ def add_topic(request, pk):
 
 
 def topic_details(request, pk, topic_id):
+	if not request.user.is_authenticated:
+		return redirect('/')
+
 	topic = get_object_or_404(Topic, pk=topic_id)
 	posts = Topic_Post.objects.filter(topic=topic)
 	context = {
@@ -72,6 +97,9 @@ def topic_details(request, pk, topic_id):
 
 
 def post_on_topic(request, pk, topic_id):
+	if not request.user.is_authenticated:
+		return redirect('/')
+
 	classroom = get_object_or_404(Classroom, pk=pk)
 	topic = get_object_or_404(Topic, pk=topic_id)
 
