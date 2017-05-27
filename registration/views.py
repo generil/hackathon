@@ -22,7 +22,6 @@ def log_in(request):
         print user
         if user is not None:
             login(request, user)
-            print "heyyyy"
             return redirect('home')
 
         else:
