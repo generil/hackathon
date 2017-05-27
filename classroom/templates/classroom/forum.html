@@ -57,10 +57,10 @@
 				<form action="{% url 'classroom:post_on_forum' classroom.pk %}?next={{ request.path }}" method="POST" enctype="multipart/form-data">
 					{% csrf_token %}
 					<div class="form-group">
-						<input type="text" class="form-control" name="title" placeholder="Title">
+						<input type="text" class="form-control" name="title" placeholder="Title" required>
 					</div>
 					<div class="form-group">
-						<textarea name="content" id="" cols="10" rows="3" class="form-control" placeholder="Content"></textarea>
+						<textarea name="content" id="" cols="10" rows="3" class="form-control" placeholder="Content" required></textarea>
 					</div>
 					<div class="form-group">
 						<label class="btn btn-primary btn-block" for="my-file-selector" style="margin-bottom:10px;">
@@ -95,7 +95,7 @@
 				<form action="{% url 'classroom:add_topic' classroom.pk %}" method="POST">
 					{% csrf_token %}
 					<div class="form-group">
-						<input type="text"  class="form-control" name="name" placeholder="Title">
+						<input type="text"  class="form-control" name="name" placeholder="Title" required>
 					</div>
 					<button class="btn btn-sm btn-default btn-block" type="submit">Add</button>
 				</form>
