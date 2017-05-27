@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render, get_object_or_404, redirect
 from django.conf import settings
+from django.urls import reverse
 
 from .models import Classroom
 from .models import Topic
@@ -18,9 +19,20 @@ def forum(request, pk):
 	classroom = get_object_or_404(Classroom, pk=pk)
 	posts = Forum_Post.objects.filter(classroom=classroom)
 	context = {
+		'classroom': classroom,
 		'posts': posts
 	}
-	return render(request, 'forum.html', context=context)
+	return render(request, 'classroom/forum.html', context=context)
+
+
+def topic(request, pk):
+	classroom = get_object_or_404(Classroom, pk=pk)
+	topics = Topic.objects.filter(classroom=classroom)
+	context = {
+		'topics': topics,
+		'classroom': classroom
+	}
+	return render(request, 'classroom/topics.html', context=context)
 
 
 def add_classroom(request):
@@ -33,32 +45,33 @@ def add_classroom(request):
 
 	return render(request, 'classroom/add_classroom.html', context=context)
 
-	
-def topic(request, pk):
-	classroom = get_object_or_404(Classroom, pk=pk)
-	topics = Topic.objects.filter(classroom=classroom)
-	context = {
-		'topics': topics,
-		'classroom': classroom
-	}
-	return render(request, 'classroom/topics.html', context=context)
-
 
 def add_topic(request, pk):
 	classroom = get_object_or_404(Classroom, pk=pk)
+	topics = Topic.objects.filter(classroom=classroom)
 	context = {
-		'classroom': classroom
+		'classroom': classroom,
+		'topics': topics
 	}
 
 	if request.method == 'POST':
 		name = request.POST.get('name')
 		Topic.objects.create(classroom=classroom, name=name, creator=request.user)
-		return redirect(reverse('topic', kwargs={'pk': classroom.pk}))
+		return redirect(reverse('classroom:topic', kwargs={'pk': classroom.pk}))
 
 	return render(request, 'classroom/add_topic.html', context=context)
 
 
-def add_topic_post(request, pk, topic_id):
+def topic_details(request, pk, topic_id):
+	topic = get_object_or_404(Topic, pk=topic_id)
+	posts = Topic_Post.objects.filter(topic=topic)
+	context = {
+		'posts': posts
+	}
+	return render(request, 'classroom/topic_details.html', context=context)
+
+
+def post_on_topic(request, pk, topic_id):
 	classroom = get_object_or_404(Classroom, pk=pk)
 	topic = get_object_or_404(Topic, pk=topic_id)
 
@@ -70,10 +83,30 @@ def add_topic_post(request, pk, topic_id):
 	return redirect(reverse('topic_details', kwargs={'pk': classroom.pk, 'topic_id': topic_id}))
 
 
-def topic_details(request, pk, topic_id):
-	topic = get_object_or_404(Topic, pk=topic_id)
-	posts = Topic_Post.objects.filter(topic=topic)
-	context = {
-		'posts': posts
-	}
-	return render(request, 'classroom/topic_details.html', context=context)
+def post_on_forum(request, pk):
+	if not request.user.is_authenticated:
+		return redirect('/')
+
+	redirect_url = request.GET.get('next')
+
+	classroom = get_object_or_404(Classroom, pk=pk)
+
+	if request.method == "POST":
+		title = request.POST.get('title')
+		content = request.POST.get('content')
+		Forum_Post.objects.create(title=title, content=content, user=request.user, classroom=classroom)
+
+	return redirect(redirect_url)
+
+
+
+
+
+
+	
+
+
+
+
+
+	

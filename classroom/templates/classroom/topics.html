@@ -1,15 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Topics</title>
-</head>
-<body>
-	{% for topic in topics %}
-	<ul>
-		<li>{{ topic }}</li>
-	</ul>
-	{% endfor%}
+{% extends "home.html" %}
 
+{% block content %}
+	<h3>Topics</h3>
+
+	{% if topics.count == 0 %}
+		<p>No topics to show</p>
+	{% else %}
+		{% for topic in topics %}
+		<ul>
+			<li><a href="#">{{ topic }}</a></li>
+		</ul>
+		{% endfor %}
+	{% endif %}
+
+	<br>
 	<a href="{% url 'classroom:add_topic' classroom.pk %}">Add topic</a>
-</body>
-</html>
+{% endblock %}
