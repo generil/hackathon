@@ -59,6 +59,18 @@ def add_topic(request, pk)
 	return render(request, 'classroom/add_topic.html', context=context)
 
 
+def add_topic_post(request, pk, topic_id):
+	classroom = get_object_or_404(Classroom, pk=pk)
+	topic = get_object_or_404(Topic, pk=topic_id)
+
+	if request.method = "POST":
+		title = request.POST.get('title')
+		content = request.POST.get('content')
+		Topic_Post.objects.create(topic=topic, user=request.user, title=title, content=content)
+
+	return redirect(reverse('topic_details', kwargs={'pk': classroom.pk, 'topic_id': topic_id}))
+
+
 def topic_details(request, pk, topic_id):
 	topic = get_object_or_404(Topic, pk=topic_id)
 	posts = Topic_Post.objects.filter(topic=topic)
