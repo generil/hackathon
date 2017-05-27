@@ -1,5 +1,20 @@
 {% extends "base.html" %}
 
-{% block content %}
-<h1>{{sample}}</h1>
+{% block home %}
+{% block nav %}
+    {% include "navbar.html" %}
+{% endblock %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            {% block sidebar %}
+                {% include "sidebar.html" %}
+            {% endblock %}
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+</div>
 {% endblock %}
