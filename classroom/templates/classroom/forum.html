@@ -8,53 +8,55 @@
 
 <div class="tab-content">
     <div id="forum" class="tab-pane fade in active">
-        {% if posts|length == 0 %}
-            <p>No posts</p>
-        {% else %}
-            <div class="row">
-                <div class="col-lg-8 col-lg-8">
-                    {% for post in posts %}
-                        <div class="panel panel-default">
-                            <div class="panel-heading" style="padding-bottom:5px; padding-top:5px;">
-                                <h5 style="padding-top: 5px; padding-bottom: 5px; margin: 0"><a href="" class="topic-btn"> Topic </a>&nbsp;&nbsp;<small style="color:darkgray">{{ post.date_created }}</small></h5>
-                            </div>
-                            <div class="panel-body">
-                                <h3 style="margin-top:0px; font-weight:bold; word-wrap: break-word;"><a href="">{{ post.title }}</a></h3>
-                                <p style="word-wrap: break-word">{{post.content}}</p>
-                                <p style="margin-bottom:0px;"><a href="">{{post.user.username}}</a></p>
-                            </div>
-                            <div class="panel-footer">
-                                <button class="btn btn-xs btn-primary">
-                                    <span class="glyphicon glyphicon-thumbs-up"></span>
-                                    <span> {{post.upvote}}</span>
-                                </button>
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
-                <div class="col-lg-4 col-lg-4">
-                    <form action="{% url 'classroom:post_on_forum' classroom.pk %}?next={{ request.path }}" method="POST">
-                        {% csrf_token %}
-						<div class="form-group">
-							 <input type="text" class="form-control" name="title" placeholder="Title">
-						</div>
-						<div class="form-group">
-							 <textarea name="content" id="" cols="10" rows="3" class="form-control" placeholder="Content"></textarea>
-						</div>
-						<div class="form-group">
-							<label class="btn btn-primary btn-block" for="my-file-selector" style="margin-bottom:10px;">
-								<input id="my-file-selector" type="file" style="display:none;" onchange="$('#upload-file-info').html($(this).val());">
-								Attach File
-							</label>
-							<div style="text-align:center">
-								<small id="upload-file-info"></small>
+		<div class="row">
+			<div class="col-lg-8 col-md-8">
+				{% if posts|length == 0 %}
+				<h1>No posts</h1>
+				{% else %}
+					<div class="row">
+						{% for post in posts %}
+							<div class="panel panel-default">
+								<div class="panel-heading" style="padding-bottom:5px; padding-top:5px;">
+									<h5 style="padding-top: 5px; padding-bottom: 5px; margin: 0"><a href="" class="topic-btn"> Topic </a>&nbsp;&nbsp;<small style="color:darkgray">{{ post.date_created }}</small></h5>
+								</div>
+								<div class="panel-body">
+									<h3 style="margin-top:0px; font-weight:bold; word-wrap: break-word;"><a href="">{{ post.title }}</a></h3>
+									<p style="word-wrap: break-word">{{post.content}}</p>
+									<p style="margin-bottom:0px;"><a href="">{{post.user.username}}</a></p>
+								</div>
+								<div class="panel-footer">
+									<button class="btn btn-xs btn-primary">
+										<span class="glyphicon glyphicon-thumbs-up"></span>
+										<span> {{post.upvote}}</span>
+									</button>
+								</div>
 							</div>
+						{% endfor %}
+					</div>
+				{% endif %}
+			</div>
+			<div class="col-lg-4 col-md-4">
+				<form action="{% url 'classroom:post_on_forum' classroom.pk %}?next={{ request.path }}" method="POST">
+					{% csrf_token %}
+					<div class="form-group">
+						<input type="text" class="form-control" name="title" placeholder="Title">
+					</div>
+					<div class="form-group">
+						<textarea name="content" id="" cols="10" rows="3" class="form-control" placeholder="Content"></textarea>
+					</div>
+					<div class="form-group">
+						<label class="btn btn-primary btn-block" for="my-file-selector" style="margin-bottom:10px;">
+							<input id="my-file-selector" type="file" style="display:none;" onchange="$('#upload-file-info').html($(this).val());">
+							Attach File
+						</label>
+						<div style="text-align:center">
+							<small id="upload-file-info"></small>
 						</div>
-						<button class="btn btn-sm btn-default btn-block" type="submit">Submit</button>
-                    </form>
-                </div>
-            </div>
-        {% endif %}
+					</div>
+					<button class="btn btn-sm btn-default btn-block" type="submit">Submit</button>
+				</form>
+			</div>
+		</div>
     </div>
     <div id="topic" class="tab-pane fade">
         {% if topics.count == 0 %}
