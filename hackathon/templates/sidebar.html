@@ -5,6 +5,15 @@
     <ul class="nav nav-sidebar">
         <li><a href="{% url 'classroom:forum' record.classroom.pk %}">{{record.classroom.name}}</a></li>
     </ul>
+    <div id="addclassroom" style="display:none">
+        <form action="">
+            <div class="form-group">
+                <input type="text" class="form-control" id="classroom" placeholder="Classroom" name="classroom">
+            </div>
+            <button class="btn btn-primary btn-block">Add Classroom</button>
+        </form>
+    </div>
+    <button class="btn btn-default btn-block" id="hide">Add Classroom</button>
     {% endfor %}
 <!--if wala-->
 {% else %}
