@@ -20,27 +20,9 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-sm-3 col-md-2 sidebar">
-				<h5>Classrooms</h5>
-				<!--if naay classroom-->
-				{% if records|length > 0 %}
-					{% for record in records %}
-					<ul class="nav nav-sidebar">
-						<li><a href="{% url 'classroom:forum' record.classroom.pk %}">{{record.classroom.name}}</a></li>
-					</ul>
-					{% endfor %}
-				<!--if wala-->
-				{% else %}
-					<p style="color:dimgray" id="textshit">You have no classrooms</p>
-					<div id="addclassroom" style="display:none">
-						<form action="">
-							<div class="form-group">
-								<input type="text" class="form-control" id="classroom" placeholder="Classroom" name="classroom">
-							</div>
-							<button class="btn btn-primary btn-block">Add Classroom</button>
-						</form>
-					</div>
-					<button class="btn btn-default btn-block" id="hide">Add Classroom</button>
-				{% endif %}
+				{% block sidebar %}
+					{% include 'sidebar.html' %}
+				{% endblock %}
 			</div>
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 				<!--home.html-->
