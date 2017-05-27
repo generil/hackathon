@@ -17,8 +17,6 @@ from .models import Record
 
 def add_classroom(request):
 	if request.method == "POST":
-<<<<<<< HEAD
-=======
 		name = request.POST.get('name')
 		c = Classroom.objects.create(name=name, creator=request.user)
 		Record.objects.create(user=request.user, classroom=c)
@@ -26,7 +24,6 @@ def add_classroom(request):
 		return redirect(reverse('forum', kwargs={'pk': c.pk}))
 
 	return render(request, 'classroom/add_classroom.html', context=context)
->>>>>>> 511cb92ca6253c3262b5e0e7aafa2c6984bb0a82
 
 
 def forum(request, pk):

@@ -16,9 +16,8 @@ def home(request):
 		'records' : records, 
 		'posts' : posts,
 	}
-<<<<<<< HEAD
+
 
 	return render(request, 'home.html', context=context)
-=======
+
 	return render(request, 'forum.html', context=context)
->>>>>>> 439e4b396741bf78b9d1a24dfe6393b28879aed1
