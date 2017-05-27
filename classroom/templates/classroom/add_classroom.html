@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Add Classroom</title>
+</head>
+<body>
+	<form action="{% url 'classroom:add_classroom' %}" method="POST">
+		<input type="text" name="name" placeholder="classroom name">
+		<button type="submit">Create</button>
+	</form>
+</body>
+</html>

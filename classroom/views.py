@@ -11,11 +11,22 @@ from .models import Topic_Post
 from .models import Forum_Post
 from .models import Topic_PostComment
 from .models import Forum_PostComment
+from .models import Record
 
 # Create your views here.
 
 def add_classroom(request):
 	if request.method == "POST":
+<<<<<<< HEAD
+=======
+		name = request.POST.get('name')
+		c = Classroom.objects.create(name=name, creator=request.user)
+		Record.objects.create(user=request.user, classroom=c)
+		c.save()
+		return redirect(reverse('forum', kwargs={'pk': c.pk}))
+
+	return render(request, 'classroom/add_classroom.html', context=context)
+>>>>>>> 511cb92ca6253c3262b5e0e7aafa2c6984bb0a82
 
 
 def forum(request, pk):
@@ -46,7 +57,7 @@ def add_topic(request, pk)
 	if request.method == "POST":
 		name = request.POST.get('name')
 		Topic.objects.create(classroom=classroom, name=name, creator=request.user)
-		return redirect(reverse('topic', kwargs={'pk': classroom.pk))
+		return redirect(reverse('topic', kwargs={'pk': classroom.pk}))
 
 	return render(request, 'classroom/add_topic.html', context=context)
 
