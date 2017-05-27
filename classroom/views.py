@@ -113,7 +113,17 @@ def post_on_topic(request, pk, topic_id):
 	if request.method == "POST":
 		title = request.POST.get('title')
 		content = request.POST.get('content')
-		Topic_Post.objects.create(topic=topic, user=request.user, title=title, content=content)
+
+		topic_post_file = request.FILES.get('file')
+
+		if topic_post_file != None:
+			fs = FileSystemStorage()
+			topic_post_file.name = 'topic_post_' + topic + '_' + topic_post_file.name
+			filename = fs.save(topic_post_file.name, topic_post_file)
+			Topic_Post.objects.create(topic=topic, user=request.user, title=title, content=content, file=filename)
+
+		else:
+			Topic_Post.objects.create(topic=topic, user=request.user, title=title, content=content)
 
 	return redirect(reverse('classroom:topic_details', kwargs={'pk': classroom.pk, 'topic_id': topic_id}))
 
@@ -129,7 +139,17 @@ def post_on_forum(request, pk):
 	if request.method == "POST":
 		title = request.POST.get('title')
 		content = request.POST.get('content')
-		Forum_Post.objects.create(title=title, content=content, user=request.user, classroom=classroom)
+			
+		forum_post_file = request.FILES.get('file')
+
+		if forum_post_file != None:
+			fs = FileSystemStorage()
+			forum_post_file.name = 'forum_post_' + topic + '_' + forum_post_file.name
+			filename = fs.save(forum_post_file.name, forum_post_file)
+			Forum_Post.objects.create(title=title, content=content, user=request.user, classroom=classroom, file=filename)
+
+		else:
+			Forum_Post.objects.create(title=title, content=content, user=request.user, classroom=classroom)
 
 	return redirect(redirect_url)
 
