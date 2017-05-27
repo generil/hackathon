@@ -1,7 +1,6 @@
 <h5>Classrooms</h5>
 <ul class="nav nav-sidebar">
-	<li class="active"><a href="#">Overview </a></li>
-	<li><a href="#">Reports</a></li>
-	<li><a href="#">Analytics</a></li>
-	<li><a href="#">Export</a></li>
+	{% for record in records %}
+	<li><a href="{% url 'classroom:forum' record.classroom.pk %}">{{record.classroom.name}}</a></li>
+	{% endfor %}
 </ul>
