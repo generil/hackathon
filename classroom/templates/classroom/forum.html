@@ -1,20 +1,31 @@
-{% extends 'home.html' %}
-{% load static %}
+{% extends "home.html" %}
 
 {% block content %}
 
-<<<<<<< HEAD
-{% for post in posts %}
-	<ul>
-		<li>
-		{{ post }}<br>
-		{{ post.content }}
-		</li>
-	</ul>
-{% endfor %}
+<a href="{% url 'classroom:forum' classroom.pk %}">Forum</a><br>
+<a href="{% url 'classroom:topic' classroom.pk %}">Topics</a>
 
-{% endblock %}
-=======
+
+<h3>POST</h3>
+{% if posts is None %}
+	<p>No posts</p>
+{% else %}
+	{% for post in posts %}
+		<p>Title: {{ post.title }}</p>
+		<p>Content: {{ post.content }}</p>
+		<p>Date: {{ post.date_created }}</p>
+		<p>Posted by: {{ post.user.username }}</p>
+		<p>Upvote: {{ post.upvote }}</p>
+		<br><br>
+	{% endfor %}
+{% endif %}
+
+<br><br>
+<form action="{% url 'classroom:post_on_forum' classroom.pk %}?next={{ request.path }}" method="POST">
+	{% csrf_token %}
+	<input type="text" name="title" placeholder="title">
+	<textarea name="content" id="" cols="10" rows="3" class="form-control" placeholder="post"></textarea>
+	<button type="submit">Submit</button>
+</form>
 {% endblock %}
 
->>>>>>> b8852b2fa4db910d9c8e354485fd1cdf1539d338
