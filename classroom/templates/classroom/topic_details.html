@@ -1,7 +1,7 @@
 {% extends "home.html" %}
 
 {% block content %}
-	<h1 style="font-weight:bold;font-size:4em;">{{topic.name}}</h1>
+	<h1 style="font-weight:bold;font-size:4em;margin-top:0px;">{{topic.name}}</h1>
 
 	<div class="row" style="margin-top:20px;">
 		<div class="col-lg-8 col-md-8">
@@ -49,6 +49,7 @@
 			{% endif %}
 		</div>
 		<div class="col-lg-4 col-md-4">
+			<p style="font-weight:bold">POST TO {{topic.name.upper}}</p>
 			<form action="{% url 'classroom:post_on_topic' classroom.pk topic.pk %}" method="POST" enctype="multipart/form-data">
 				{% csrf_token %}
 				<div class="form-group">
