@@ -62,7 +62,7 @@ def sign_up(request):
         else:
             context = dataCheck[1]
 
-    return render(request, 'home.html', context=context)
+    return render(request, 'register.html', context=context)
 
 
 def user_integrityCheck(data):
