@@ -48,14 +48,21 @@ def sign_up(request):
         dataCheck = user_integrityCheck(data)
 
         if dataCheck == True:
-            User.objects.create_user(
+            created = User.objects.create_user(
             	username = data['username'], 
             	password = data['password1'],
             	email = data['email'])
             
+            created.save()
+            person = Person.objects.get(id = created.id)
+            person.avatar = "default-user-avatar.png"
+            # person.avatar.url = "/storage/default-user-avatar.png"
+            person.save()
+            
             user = authenticate(username = data['username'], password = data['password1'])
             login(request, user)
-            
+
+            print user
             return redirect('home')
 
         else:
@@ -112,13 +119,14 @@ def edit_profile(request):
         user_avatar = request.FILES.get('avatar')
         print user_avatar
 
-        fs = FileSystemStorage()
-        user_avatar.name = 'user_' + str(request.user) + '_' + user_avatar.name
-        filename = fs.save(user_avatar.name, user_avatar)
+        if user_avatar != None:
+            fs = FileSystemStorage()
+            user_avatar.name = 'user_' + str(request.user) + '_' + user_avatar.name
+            filename = fs.save(user_avatar.name, user_avatar)
 
-        person = Person.objects.get(id = request.user.id)
-        person.avatar = filename
-        person.save()
+            person = Person.objects.get(id = request.user.id)
+            person.avatar = filename
+            person.save()
 
     return redirect('home')
 

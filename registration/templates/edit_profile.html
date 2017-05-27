@@ -27,8 +27,8 @@
                     <div class="col-lg-6 col-md-6">
                         <form action="{% url 'edit_profile' %}" method="POST" enctype="multipart/form-data">
                             {% csrf_token %}
-                            <div class="form-group imagepreview" style="text-align:center; display:none">
-                                <img id="preview" class="center-cropped" alt="" src="" height="128px" width="128px">
+                            <div class="form-group imagepreview" style="text-align:center;">
+                                <img id="preview" class="center-cropped" alt="" src="{{ person.avatar.url }}" height="300px" width="300px">
                             </div>
                             <div class="form-group">
                                 <div class="input-group">
