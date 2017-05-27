@@ -3,7 +3,7 @@
 {% block content %}
 <ul class="nav nav-pills" style="margin-bottom: 20px;">
     <li class="active"><a data-toggle="pill" href="#forum">Forums</a></li>
-    <li><a data-toggle="pill" href="#topic">Topics</a></li>
+    <li><a href="{% url 'classroom:topic' classroom.pk %}">Topics</a></li>
 </ul>
 
 <div class="tab-content">
@@ -57,11 +57,7 @@
 				<form action="{% url 'classroom:post_on_forum' classroom.pk %}?next={{ request.path }}" method="POST" enctype="multipart/form-data">
 					{% csrf_token %}
 					<div class="form-group">
-<<<<<<< HEAD
 						<input type="text" class="form-control" name="title" placeholder="Title" required>
-=======
-						<input type="text" class="form-control" name="title" placeholder="Title" required="">
->>>>>>> de46467da62f06600347375ccfb034a068eca04b
 					</div>
 					<div class="form-group">
 						<textarea name="content" id="" cols="10" rows="3" class="form-control" placeholder="Content" required></textarea>
@@ -76,32 +72,6 @@
 						</div>
 					</div>
 					<button class="btn btn-sm btn-default btn-block" type="submit">Submit</button>
-				</form>
-			</div>
-		</div>
-    </div>
-    <div id="topic" class="tab-pane fade">
-		<div class="row">
-			<div class="col-lg-8 col-md-8">
-				{% if topics|length == 0 %}
-					<h1>No topics</h1>
-				{% else %}
-					{% for topic in topics %}
-					<div class="panel panel-default">
-						<div class="panel-body" style="margin-top:0;margin-bottom:0">
-							<h3 style="margin-top:0;margin-bottom:0;font-weight:bold"><a href="{% url 'classroom:topic_details' classroom.pk topic.pk %}">{{ topic }}</a></h3>
-						</div>
-					</div>
-					{% endfor %}
-				{% endif %}
-			</div>
-			<div class="col-lg-4 col-md-4">
-				<form action="{% url 'classroom:add_topic' classroom.pk %}" method="POST">
-					{% csrf_token %}
-					<div class="form-group">
-						<input type="text"  class="form-control" name="name" placeholder="Title" required>
-					</div>
-					<button class="btn btn-sm btn-default btn-block" type="submit">Add</button>
 				</form>
 			</div>
 		</div>

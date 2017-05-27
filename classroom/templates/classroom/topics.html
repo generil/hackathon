@@ -1,18 +1,37 @@
 {% extends "home.html" %}
 
 {% block content %}
-	<h3>Topics</h3>
+<ul class="nav nav-pills" style="margin-bottom: 20px;">
+    <li><a href="{% url 'classroom:forum' classroom.pk %}">Forums</a></li>
+    <li class="active"><a data-toggle="pill" href="#topic">Topics</a></li>
+</ul>
 
-	{% if topics.count == 0 %}
-		<p>No topics to show</p>
-	{% else %}
-		{% for topic in topics %}
-		<ul>
-			<li><a href="{% url 'classroom:topic_details' classroom.pk topic.pk %}">{{ topic }}</a></li>
-		</ul>
-		{% endfor %}
-	{% endif %}
-
-	<br>
-	<a href="{% url 'classroom:add_topic' classroom.pk %}">Add topic</a>
+<div class="tab-content">
+	<div id="topic" class="tab-pane fade in active">
+		<div class="row">
+			<div class="col-lg-8 col-md-8">
+				{% if topics|length == 0 %}
+					<h1>No topics</h1>
+				{% else %}
+					{% for topic in topics %}
+					<div class="panel panel-default">
+						<div class="panel-body" style="margin-top:0;margin-bottom:0">
+							<h3 style="margin-top:0;margin-bottom:0;font-weight:bold"><a href="{% url 'classroom:topic_details' classroom.pk topic.pk %}">{{ topic }}</a></h3>
+						</div>
+					</div>
+					{% endfor %}
+				{% endif %}
+			</div>
+			<div class="col-lg-4 col-md-4">
+				<form action="{% url 'classroom:add_topic' classroom.pk %}" method="POST">
+					{% csrf_token %}
+					<div class="form-group">
+						<input type="text"  class="form-control" name="name" placeholder="Title" required>
+					</div>
+					<button class="btn btn-sm btn-default btn-block" type="submit">Add</button>
+				</form>
+			</div>
+		</div>
+    </div>
+</div>
 {% endblock %}
