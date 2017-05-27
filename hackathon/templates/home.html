@@ -6,10 +6,18 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-sm-3 col-md-2 sidebar">
-			{% block sidebar %} {% include "sidebar.html" %} {% endblock %}
+			<h5>Classrooms</h5>
+			{% for record in records %}
+			<ul class="nav nav-sidebar">
+				<li><a href="{% url 'classroom:forum' record.classroom.pk %">{{record.classroom.name}}</a></li>
+			</ul>
+			{% endfor %}
 		</div>
 		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-			{% block content %} {% endblock %}
+			<!--main.html-->
+			{% block content %}
+				{% include 'main.html' %}
+			{% endblock %}
 		</div>
 	</div>
 </div>
