@@ -22,3 +22,11 @@ function readURL(input) {
 $('input[type="file"]').change(function() {
   readURL(this);
 });
+
+$(document).ready(function(){
+  $("#hide").click(function(){
+    $("#textshit").html("Add Classroom");
+    $("#addclassroom").show();
+    $("#hide").hide();
+  });
+});
