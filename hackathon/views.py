@@ -16,10 +16,4 @@ def home(request):
 		'records' : records, 
 		'posts' : posts,
 	}
-<<<<<<< HEAD
-	return render(request, 'main.html', context=context)
-=======
-	
 	return render(request, 'home.html', context=context)
-
->>>>>>> 887ecbf070dd0a850b7d12fc34732c0a2fad0c9e
