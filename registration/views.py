@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 
-from hackathon import views
+# from hackathon import views
 from models import User
 from models import Person
 

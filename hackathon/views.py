@@ -1,9 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from classroom.models import Record, Forum_Post
 from registration.models import Person
+# from registration.views import log_in
 
 
 def home(request):
+	if not request.user.is_authenticated:
+		return redirect('log_in')
+
 	records = Record.objects.filter(user = request.user)
 	
 	posts = []
