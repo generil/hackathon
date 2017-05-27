@@ -14,6 +14,8 @@ from .models import Forum_PostComment
 from .models import Record
 from registration.models import Person
 
+from django.core.files.storage import FileSystemStorage
+
 # Create your views here.
 
 def forum(request, pk):
@@ -123,7 +125,7 @@ def post_on_topic(request, pk, topic_id):
 
 		if topic_post_file != None:
 			fs = FileSystemStorage()
-			topic_post_file.name = 'topic_post_' + topic + '_' + topic_post_file.name
+			topic_post_file.name = 'topic_post_' + str(topic) + '_' + topic_post_file.name
 			filename = fs.save(topic_post_file.name, topic_post_file)
 			Topic_Post.objects.create(topic=topic, user=request.user, title=title, content=content, file=filename)
 
@@ -149,9 +151,12 @@ def post_on_forum(request, pk):
 
 		if forum_post_file != None:
 			fs = FileSystemStorage()
-			forum_post_file.name = 'forum_post_' + topic + '_' + forum_post_file.name
+
+			filetype = get_file_type(forum_post_file.name)
+			# forum_post_file.name = 'forum_post_' + str(topic) + '_' + forum_post_file.name
+			filetype = get_file_type(forum_post_file.name)
 			filename = fs.save(forum_post_file.name, forum_post_file)
-			Forum_Post.objects.create(title=title, content=content, user=request.user, classroom=classroom, file=filename)
+			Forum_Post.objects.create(title=title, content=content, user=request.user, classroom=classroom, file=filename, filetype=filetype)
 
 		else:
 			Forum_Post.objects.create(title=title, content=content, user=request.user, classroom=classroom)
@@ -159,6 +164,13 @@ def post_on_forum(request, pk):
 	return redirect(redirect_url)
 
 
+def get_file_type(string):
+	i = len(string) - 1
+	filetype = ""
+	while string[i] != '.':
+		filetype += string[i]
+		i -= 1
+	return filetype[::-1]
 
 
 

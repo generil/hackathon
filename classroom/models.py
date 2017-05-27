@@ -44,6 +44,7 @@ class Topic_Post(models.Model):
 	upvote = models.IntegerField(default=0)
 	date_created = models.DateTimeField(auto_now_add=True)
 	file = models.FileField(blank = True)
+	filetype = models.CharField(blank = True, max_length=9)
 
 	class Meta:
 		ordering = ['-date_created']
@@ -60,6 +61,7 @@ class Forum_Post(models.Model):
 	upvote = models.IntegerField(default=0)
 	date_created = models.DateTimeField(auto_now_add=True)
 	file = models.FileField(blank = True)
+	filetype = models.CharField(blank = True, max_length=9)
 
 	class Meta:
 		ordering = ['-date_created']
