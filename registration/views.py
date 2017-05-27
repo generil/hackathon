@@ -54,7 +54,6 @@ def sign_up(request):
             	email = data['email'])
             
             user = authenticate(username = data['username'], password = data['password1'])
-            print user
             login(request, user)
             
             return redirect('home')

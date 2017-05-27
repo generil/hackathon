@@ -26,14 +26,14 @@
 								<form action="{% url 'log_in' %}" method="POST">
 									{% csrf_token %}
 									<div class="form-group">
-										<input type="text" class="form-control" id="username" placeholder="Enter email" name="username">
+										<input type="text" class="form-control" id="username" placeholder="Username" name="username">
 									</div>
 									<div class="form-group">
-										<input type="password" class="form-control" id="pwd" placeholder="Enter password" name="password">
+										<input type="password" class="form-control" id="pwd" placeholder="Password" name="password">
 									</div>
 									<div>
-										<small style="color:red">{{error_message}}</small><br><br>
-									</div>
+										<small style="color:red">{{error_message}}</small>
+									</div><br>
 									<button type="submit" class="btn btn-primary">Login</button>
 								</form>
 								</div>
