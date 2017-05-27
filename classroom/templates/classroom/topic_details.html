@@ -1,24 +1,26 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Details</title>
-</head>
-<body>
-	{% for post in posts %}
-	<ul>
-		<li>
-			{{ post }}
-			{{ post.content }}	
-		</li>
-	</ul>
-	{% end for %}
+{% extends "home.html" %}
 
-	<form action="{% url 'classroom:add_topic_post' %}" method="POST">
+{% block content %}
+	<h3>Topic: {{topic.name}}</h3><br>
+
+	{% if posts.count <= 0 %}
+		<p>No posts</p>
+	{% else %}
+		{% for post in posts %}
+			<p>title: {{ post.title }}</p>
+			<p>content: {{ post.content }}</p>
+			<p>posted by: {{ post.user.username }}</p>
+			<p>date: {{ post.date_created }}</p>
+			<p>upvote: {{ post.upvote }}</p>
+			<br>
+		{% endfor %}
+	{% endif %}
+
+	<br><br>
+	<form action="{% url 'classroom:post_on_topic' classroom.pk topic.pk %}" method="POST">
 		{% csrf_token %}
 		<input type="text" name="title" placeholder="post title">
 		<textarea name="content" id="" cols="10" rows="3" class="form-control" placeholder="add post"></textarea>
 		<button type="submit">Post</button>
 	</form>
-	
-</body>
-</html>
+{% endblock %}
