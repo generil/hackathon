@@ -1,58 +1,69 @@
-{% extends "base.html" %}
 {% load static %}
-{% block styles %}
-<link rel="stylesheet" href="{% static 'css/login.css' %}">
-{% endblock %}
+<html>
 
-{% block login %}
-<div class="site-wrapper">
-	<div class="site-wrapper-inner">
-		<div class="cover-container">
+<head>
+	<title>Login</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-			<div class="masthead clearfix">
-				<div class="inner">
-					<h1 class="masthead-brand" style="font-size:3em">Logo</h1>
+	<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+	<link rel="stylesheet" href="{% static 'css/app.css' %}">
+	<link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+
+<body>
+	<div class="site-wrapper">
+		<div class="site-wrapper-inner">
+			<div class="cover-container">
+				<div class="masthead clearfix">
+					<div class="inner">
+						<h1 class="masthead-brand" style="font-size:3em">Logo</h1>
+					</div>
 				</div>
-			</div>
 
-			<div class="inner cover">
-				<div class="row">
-					<div class="col-lg-3 col-md-3 col-sm-3"></div>
-					<div class="col-lg-6 col-md-6 col-sm-6">
-						<div class="thumbnail">
-							<div class="caption">
-								<div class="container-fluid">
-								<h2>Log In</h2>
-								<form action="{% url 'log_in' %}" method="POST">
-									{% csrf_token %}
-									<div class="form-group">
-										<input type="text" class="form-control" id="username" placeholder="Enter email" name="username">
+				<div class="inner cover">
+					<div class="row">
+						<div class="col-lg-3 col-md-3 col-sm-3"></div>
+						<div class="col-lg-6 col-md-6 col-sm-6">
+							<div class="thumbnail">
+								<div class="caption">
+									<div class="container-fluid">
+									<h2>Log In</h2>
+									<form action="{% url 'log_in' %}" method="POST">
+										{% csrf_token %}
+										<div class="form-group">
+											<input type="text" class="form-control" id="username" placeholder="Username" name="username">
+										</div>
+										<div class="form-group">
+											<input type="password" class="form-control" id="pwd" placeholder="Password" name="password">
+										</div>
+										<div>
+											<small style="color:red">{{error_message}}</small>
+										</div><br>
+										<button type="submit" class="btn btn-primary">Login</button>
+									</form>
 									</div>
-									<div class="form-group">
-										<input type="password" class="form-control" id="pwd" placeholder="Enter password" name="password">
-									</div>
-									<div>
-										<small style="color:red">{{error_message}}</small><br><br>
-									</div>
-									<button type="submit" class="btn btn-primary">Login</button>
-								</form>
 								</div>
 							</div>
 						</div>
+						<div class="col-lg-3 col-md-3 col-sm-3"></div>
 					</div>
-					<div class="col-lg-3 col-md-3 col-sm-3"></div>
+					<p style="color: rgba(255, 255, 255, .5);">New here? <a href="{% url 'sign_up' %}">Sign Up</a>.</p>
 				</div>
-				<p style="color: rgba(255, 255, 255, .5);">New here? <a href="{% url 'sign_up' %}">Sign Up</a>.</p>
-			</div>
 
-			<div class="mastfoot">
-				<div class="inner">
-					<p>Made with <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> by <a href="fb.com/rdatibula">Romy</a>,
-						<a href="fb.com/generildls">Generil</a>, and <a href="fb.com/jams.salvacion">Alfi</a></p>
+				<div class="mastfoot">
+					<div class="inner">
+						<p>Made with <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> by <a href="fb.com/rdatibula">Romy</a>,
+							<a href="fb.com/generildls">Generil</a>, and <a href="fb.com/jams.salvacion">Alfi</a></p>
+					</div>
 				</div>
-			</div>
 
+			</div>
 		</div>
 	</div>
-</div>
-{% endblock %}
+	<script src="{% static 'js/jquery.js' %}"></script>
+	<script src="{% static 'js/bootstrap.js' %}"></script>
+</body>
+
+</html>
