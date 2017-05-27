@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Add Topic</title>
+</head>
+<body>
+	<form action="{% url 'classroom:add_topic' %}" method="POST">
+		{% csrf_token %}
+		<input type="text" name="name" placeholder="name">
+		<button type="submit">Add Topic</button>
+	</form>
+</body>
+</html>
