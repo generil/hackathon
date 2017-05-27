@@ -1,5 +1,25 @@
-{% extends 'home.html' %}
-{% load static %}
-{% block content %}
-<h1>Hi</h1>
+{% block forum %}
+
+<div class="panel panel-default">
+    <div class="panel-heading" style="padding-bottom:5px; padding-top:5px;">
+        <h5 style="padding-top: 5px; padding-bottom: 5px; margin: 0"><a href="" class="topic-btn"> Topic </a>&nbsp;&nbsp;<small style="color:darkgray">Date</small></h5>
+    </div>
+    <div class="panel-body">
+        <h3 style="margin-top:0px; font-weight:bold; word-wrap: break-word;"><a href="">Question</a></h3>
+        <p style="margin-bottom:0px;"><a href="">User</a></p>
+    </div>
+    <div class="panel-footer">
+        <div class="btn-group" role="group">
+            <button type="button" class="btn btn-xs btn-primary">
+                <span class="glyphicon glyphicon-arrow-up"></span>
+                <span> 0</span>
+            </button>
+            <button type="button" class="btn btn-xs btn-danger">
+                <span class="glyphicon glyphicon-arrow-down"></span>
+                <span> 0</span>
+            </button>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
