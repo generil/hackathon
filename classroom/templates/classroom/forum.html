@@ -75,13 +75,19 @@
 					<button class="btn btn-sm btn-default btn-block" type="submit">POST</button>
 				</form>
 				<hr>
+				{% if error %}
+					<p style="color: red;">{{error}}</p>
+				{% elif success %}
+					<p style="color: green;">{{success}}</p>
+				{% endif %}
 				<p style="font-weight:bold">ADD MEMBER</p>
-				<form action="">
+				<form action="{% url 'classroom:add_member' classroom.pk %}" method="POST">
+					{% csrf_token %}
 					<div class="input-group">
 						<span class="input-group-addon" id="sizing-addon2">@</span>
-						<input type="text" class="form-control" placeholder="Add your friends" required>
+						<input type="text" class="form-control" placeholder="Add your friends" name="username" required>
 						<span class="input-group-btn">
-							<button class="btn btn-primary" type="button">Add</button>
+							<button class="btn btn-primary" type="submit">Add</button>
 						</span>
 					</div>
 				</form>
