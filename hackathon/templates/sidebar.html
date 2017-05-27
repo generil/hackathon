@@ -3,7 +3,7 @@
 {% if records|length > 0 %}
     {% for record in records %}
     <ul class="nav nav-sidebar">
-        <li><a href="{% url 'classroom:forum' record.classroom.pk %">{{record.classroom.name}}</a></li>
+        <li><a href="{% url 'classroom:forum' record.classroom.pk %}">{{record.classroom.name}}</a></li>
     </ul>
     {% endfor %}
 <!--if wala-->
