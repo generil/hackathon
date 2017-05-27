@@ -1,0 +1,12 @@
+{% extends "home.html" %}
+
+{% block content %}
+	<h3>Add topic</h3>
+	
+	<form action="{% url 'classroom:add_topic' classroom.pk %}" method="POST">
+		{% csrf_token %}
+		<input type="text" name="name" placeholder="Title">
+		<button type="submit">Add</button>
+	</form>
+
+{% endblock %}

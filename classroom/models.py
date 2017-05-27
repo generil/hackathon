@@ -29,6 +29,9 @@ class Topic(models.Model):
 	creator = models.ForeignKey(User, on_delete=models.CASCADE)
 	date_created = models.DateTimeField(auto_now_add=True)
 
+	class Meta:
+		ordering = ['-date_created']
+		
 	def __str__(self):
 		return self.name + " - " + self.creator.username
 
@@ -57,7 +60,7 @@ class Forum_Post(models.Model):
 	date_created = models.DateTimeField(auto_now_add=True)
 
 	class Meta:
-		ordering = ['date_created']
+		ordering = ['-date_created']
 
 	def __str__(self):
 		return self.title + " - " + self.user.username
