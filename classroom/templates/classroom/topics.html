@@ -8,7 +8,7 @@
 	{% else %}
 		{% for topic in topics %}
 		<ul>
-			<li><a href="#">{{ topic }}</a></li>
+			<li><a href="{% url 'classroom:topic_details' classroom.pk topic.pk %}">{{ topic }}</a></li>
 		</ul>
 		{% endfor %}
 	{% endif %}
