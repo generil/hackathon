@@ -106,7 +106,7 @@ def edit_profile(request):
         person.avatar = filename
         person.save()
 
-    return redirect('')
+    return redirect('home')
 
 
 def log_out(request):
