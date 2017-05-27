@@ -16,7 +16,7 @@
 					{% for topic in topics %}
 					<div class="panel panel-default">
 						<div class="panel-body" style="margin-top:0;margin-bottom:0">
-							<h3 style="margin-top:0;margin-bottom:0;font-weight:bold"><a href="{% url 'classroom:topic_details' classroom.pk topic.pk %}">{{ topic }}</a></h3>
+							<h3 style="margin-top:0;margin-bottom:0;font-weight:bold"><a href="{% url 'classroom:topic_details' classroom.pk topic.pk %}">{{ topic.name }}</a></h3>
 						</div>
 					</div>
 					{% endfor %}
