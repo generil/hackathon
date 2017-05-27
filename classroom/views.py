@@ -2,6 +2,8 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render, get_object_or_404, redirect
+from django.conf import settings
+from hackathon import views
 
 from .models import Classroom
 from .models import Topic
@@ -14,8 +16,6 @@ from .models import Forum_PostComment
 
 def add_classroom(request):
 	if request.method == "POST":
-		
-
 
 
 def forum(request, pk):
@@ -24,7 +24,7 @@ def forum(request, pk):
 	context = {
 		'posts': posts
 	}
-	return render(request, 'classroom/forum.html', context=context)
+	return render(request, 'forum.html', context=context)
 
 
 def topic(request, pk):
@@ -58,16 +58,3 @@ def topic_details(request, pk, topic_id):
 		'posts': posts
 	}
 	return render(request, 'classroom/topic_details.html', context=context)
-
-
-
-
-
-
-
-
-
-
-
-
-
