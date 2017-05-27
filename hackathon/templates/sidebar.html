@@ -1,30 +1,24 @@
 <h5>Classrooms</h5>
 <!--if naay classroom-->
 {% if records|length > 0 %}
-    {% for record in records %}
-    <ul class="nav nav-sidebar">
+   <ul class="nav nav-sidebar">
+      {% for record in records %}
         <li><a href="{% url 'classroom:forum' record.classroom.pk %}">{{record.classroom.name}}</a></li>
-    </ul>
-    <div id="addclassroom" style="display:none">
-        <form action="">
-            <div class="form-group">
-                <input type="text" class="form-control" id="classroom" placeholder="Classroom" name="classroom">
-            </div>
-            <button class="btn btn-primary btn-block">Add Classroom</button>
-        </form>
-    </div>
-    <button class="btn btn-default btn-block" id="hide">Add Classroom</button>
-    {% endfor %}
+      {% endfor %}
+   </ul>
+    
 <!--if wala-->
 {% else %}
     <p style="color:dimgray" id="textshit">You have no classrooms</p>
-    <div id="addclassroom" style="display:none">
-        <form action="">
-            <div class="form-group">
-                <input type="text" class="form-control" id="classroom" placeholder="Classroom" name="classroom">
-            </div>
-            <button class="btn btn-primary btn-block">Add Classroom</button>
-        </form>
-    </div>
-    <button class="btn btn-default btn-block" id="hide">Add Classroom</button>
 {% endif %}
+
+<div id="addclassroom" style="display:none">
+    <form action="{% url 'classroom:add_classroom' %}" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <input type="text" class="form-control" id="classroom" placeholder="Classroom" name="name">
+        </div>
+        <button class="btn btn-primary btn-block">Add Classroom</button>
+    </form>
+</div>
+<button class="btn btn-default btn-block" id="hide">Add Classroom</button>
