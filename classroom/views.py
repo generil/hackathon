@@ -9,6 +9,7 @@ from .models import Topic_Post
 from .models import Forum_Post
 from .models import Topic_PostComment
 from .models import Forum_PostComment
+from .models import Record
 
 # Create your views here.
 
@@ -16,6 +17,7 @@ def add_classroom(request):
 	if request.method == "POST":
 		name = request.POST.get('name')
 		c = Classroom.objects.create(name=name, creator=request.user)
+		Record.objects.create(user=request.user, classroom=c)
 		c.save()
 		return redirect(reverse('forum', kwargs={'pk': c.pk}))
 

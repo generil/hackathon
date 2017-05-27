@@ -15,6 +15,14 @@ class Classroom(models.Model):
 		return self.name + " - " + self.creator.username
 
 
+class Record(models.Model):
+	user = models.ForeignKey(User, on_delete=models.CASCADE)
+	classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE)
+
+	def __str__(self):
+		return self.user.username + " - " + self.classroom.name
+		
+
 class Topic(models.Model):
 	classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE)
 	name = models.CharField(max_length=500)
@@ -33,6 +41,9 @@ class Topic_Post(models.Model):
 	upvote = models.IntegerField(default=0)
 	date_created = models.DateTimeField(auto_now_add=True)
 
+	class Meta:
+		ordering = ['-date_created']
+
 	def __str__(self):
 		return self.title + " - " + self.user.username
 
@@ -45,6 +56,9 @@ class Forum_Post(models.Model):
 	upvote = models.IntegerField(default=0)
 	date_created = models.DateTimeField(auto_now_add=True)
 
+	class Meta:
+		ordering = ['date_created']
+
 	def __str__(self):
 		return self.title + " - " + self.user.username
 
@@ -55,6 +69,9 @@ class Topic_PostComment(models.Model):
 	content = models.CharField(max_length=500)
 	date_created = models.DateTimeField(auto_now_add=True)
 
+	class Meta:
+		ordering = ['-date_created']
+
 	def __str__(self):
 		return self.user.username + " - " + self.content
 
@@ -64,6 +81,9 @@ class Forum_PostComment(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
 	content = models.CharField(max_length=500)
 	date_created = models.DateTimeField(auto_now_add=True)
+
+	class Meta:
+		ordering = ['-date_created']
 
 	def __str__(self):
 		return self.user.username + " - " + self.content
