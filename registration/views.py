@@ -10,19 +10,19 @@ from hackathon import views
 
 def log_in(request):
     if request.user.is_authenticated:	
-        return redirect('')
+        return redirect('home')
 
     context = {}
 
     if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-
-        user = authenticate(username=username, password=password)
-
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        # print email, password
+        user = authenticate(username = username, password = password)
+        print user
         if user is not None:
             login(request, user)
-
+            print "heyyyy"
             return redirect('home')
 
         else:
