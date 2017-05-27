@@ -45,13 +45,13 @@ def topic(request, pk):
 	return render(request, 'classroom/topics.html', context=context)
 
 
-def add_topic(request, pk)
+def add_topic(request, pk):
 	classroom = get_object_or_404(Classroom, pk=pk)
 	context = {
 		'classroom': classroom
 	}
 
-	if request.method == "POST":
+	if request.method == 'POST':
 		name = request.POST.get('name')
 		Topic.objects.create(classroom=classroom, name=name, creator=request.user)
 		return redirect(reverse('topic', kwargs={'pk': classroom.pk}))
@@ -63,7 +63,7 @@ def add_topic_post(request, pk, topic_id):
 	classroom = get_object_or_404(Classroom, pk=pk)
 	topic = get_object_or_404(Topic, pk=topic_id)
 
-	if request.method = "POST":
+	if request.method == "POST":
 		title = request.POST.get('title')
 		content = request.POST.get('content')
 		Topic_Post.objects.create(topic=topic, user=request.user, title=title, content=content)
