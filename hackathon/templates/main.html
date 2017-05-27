@@ -1,0 +1,23 @@
+{% extends 'home.html' %}
+{% load static %}
+{% block content %}
+<ul class="nav nav-pills" style="margin-bottom: 20px;">
+    <li class="active"><a data-toggle="pill" href="#forums">All Forums</a></li>
+    <li><a data-toggle="pill" href="#topics">All Topics</a></li>
+</ul>
+<!--ALL FORUMS AND TOPICS-->
+<div class="tab-content">
+    <div id="forums" class="tab-pane fade in active">
+        {% block forum %}
+            <!--all forums tab-->
+            {% include 'forum.html' %}
+        {% endblock %}
+    </div>
+    <div id="topics" class="tab-pane fade">
+        {% block topic %}
+            <!--all topics tab-->
+            {% include 'topic.html' %}
+        {% endblock %}
+    </div>
+</div>
+{% endblock %}

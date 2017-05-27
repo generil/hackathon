@@ -5,4 +5,4 @@ def home(request):
 	context = {
 	    'sample': dummy
 	}
-	return render(request, 'forum.html', context=context)
+	return render(request, 'main.html', context=context)
