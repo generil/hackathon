@@ -3,7 +3,6 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render, get_object_or_404, redirect
 from django.conf import settings
-from hackathon import views
 
 from .models import Classroom
 from .models import Topic
@@ -15,6 +14,15 @@ from .models import Record
 
 # Create your views here.
 
+def forum(request, pk):
+	classroom = get_object_or_404(Classroom, pk=pk)
+	posts = Forum_Post.objects.filter(classroom=classroom)
+	context = {
+		'posts': posts
+	}
+	return render(request, 'forum.html', context=context)
+
+
 def add_classroom(request):
 	if request.method == "POST":
 		name = request.POST.get('name')
@@ -25,16 +33,7 @@ def add_classroom(request):
 
 	return render(request, 'classroom/add_classroom.html', context=context)
 
-
-def forum(request, pk):
-	classroom = get_object_or_404(Classroom, pk=pk)
-	posts = Forum_Post.objects.filter(clasroom=classroom)
-	context = {
-		'posts': posts
-	}
-	return render(request, 'forum.html', context=context)
-
-
+	
 def topic(request, pk):
 	classroom = get_object_or_404(Classroom, pk=pk)
 	topics = Topic.objects.filter(classroom=classroom)
