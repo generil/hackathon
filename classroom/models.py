@@ -12,7 +12,7 @@ class Classroom(models.Model):
 	date_created = models.DateTimeField(auto_now_add=True)
 
 	def __str__(self):
-		return self.name + " - " + self.creator
+		return self.name + " - " + self.creator.username
 
 
 class Topic(models.Model):
@@ -22,7 +22,7 @@ class Topic(models.Model):
 	date_created = models.DateTimeField(auto_now_add=True)
 
 	def __str__(self):
-		return self.name + " - " + self.creator
+		return self.name + " - " + self.creator.username
 
 
 class Topic_Post(models.Model):
@@ -34,7 +34,7 @@ class Topic_Post(models.Model):
 	date_created = models.DateTimeField(auto_now_add=True)
 
 	def __str__(self):
-		return self.title + " - " + self.user
+		return self.title + " - " + self.user.username
 
 
 class Forum_Post(models.Model):
@@ -46,7 +46,7 @@ class Forum_Post(models.Model):
 	date_created = models.DateTimeField(auto_now_add=True)
 
 	def __str__(self):
-		return self.title + " - " + self.user
+		return self.title + " - " + self.user.username
 
 
 class Topic_PostComment(models.Model):
@@ -56,7 +56,7 @@ class Topic_PostComment(models.Model):
 	date_created = models.DateTimeField(auto_now_add=True)
 
 	def __str__(self):
-		return self.user + " - " + self.content
+		return self.user.username + " - " + self.content
 
 
 class Forum_PostComment(models.Model):
@@ -66,7 +66,7 @@ class Forum_PostComment(models.Model):
 	date_created = models.DateTimeField(auto_now_add=True)
 
 	def __str__(self):
-		return self.user + " - " + self.content
+		return self.user.username + " - " + self.content
 
 
 

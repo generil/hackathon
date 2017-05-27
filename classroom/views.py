@@ -14,8 +14,12 @@ from .models import Forum_PostComment
 
 def add_classroom(request):
 	if request.method == "POST":
-		
+		name = request.POST.get('name')
+		c = Classroom.objects.create(name=name, creator=request.user)
+		c.save()
+		return redirect(reverse('forum', kwargs={'pk': c.pk}))
 
+	return render(request, 'classroom/add_classroom.html', context=context)
 
 
 def forum(request, pk):
@@ -46,7 +50,7 @@ def add_topic(request, pk)
 	if request.method == "POST":
 		name = request.POST.get('name')
 		Topic.objects.create(classroom=classroom, name=name, creator=request.user)
-		return redirect(reverse('topic', kwargs={'pk': classroom.pk))
+		return redirect(reverse('topic', kwargs={'pk': classroom.pk}))
 
 	return render(request, 'classroom/add_topic.html', context=context)
 
