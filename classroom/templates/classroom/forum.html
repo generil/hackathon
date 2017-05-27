@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Forum</title>
+</head>
+<body>
+	{% for post in posts %}
+	<ul>
+		<li>{{ post }}
+		{{ post.content }}
+		</li>
+	</ul>
+	{% endfor %}
+</body>
+</html>
