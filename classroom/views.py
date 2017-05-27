@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.shortcuts import render, get_object_or_404, redirect
 from django.conf import settings
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 from .models import Classroom
 from .models import Topic
@@ -172,6 +173,39 @@ def get_file_type(string):
 	return filetype[::-1]
 
 
+def add_member(request, pk):
+	if not request.user.is_authenticated:
+		return redirect('/')
+
+	classroom = get_object_or_404(Classroom, pk=pk)
+	posts = Forum_Post.objects.filter(classroom=classroom)
+	records = Record.objects.filter(user=request.user)
+	person = Person.objects.get(id = request.user.id)
+	context = {
+		'classroom': classroom,
+		'posts': posts,
+		'records': records,
+		'person': person
+	}
+
+	if request.method == "POST":
+		username = request.POST.get('username')
+		users = User.objects.filter(username=username)
+		if users:
+			user = User.objects.get(username=username)
+			record = Record.objects.filter(user=user, classroom=classroom)
+			if record:
+				context['error'] = "User already member of the classroom!"
+			else:			
+				Record.objects.create(user=user, classroom=classroom)
+				context['success'] = "Successfully Added!"
+		else:
+			context['error'] = "Username does not exist!"
+
+	return render(request, 'classroom/forum.html', context=context)
+
+
+	
 
 
 	
