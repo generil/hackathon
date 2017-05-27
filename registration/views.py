@@ -8,6 +8,7 @@ from django.core.files.storage import FileSystemStorage
 
 from hackathon import views
 from models import User
+from models import Person
 
 def log_in(request):
     if request.user.is_authenticated:	
@@ -83,23 +84,37 @@ def user_integrityCheck(data):
     return True
 
 
+def edit_profile_view(request):
+  if not request.user.is_authenticated:
+      return redirect('log_in')
+  person = Person.objects.get(id = request.user.id)
+
+  context = {
+  	'person' : person,
+  }
+  return render(request, 'edit_profile.html', context)
+
 def edit_profile(request):
     if not request.user.is_authenticated:
-        return redirect('sign_in')
+        return redirect('log_in')
 
     if request.method == 'POST':
-        new_first_name = request.POST.get(new_first_name)
-        new_last_name = request.POST.get(new_first_name)
-
+        new_first_name = request.POST.get('first_name')
+        new_last_name = request.POST.get('last_name')
         user = request.user
+        
+        if new_first_name != '':
+          user.first_name = new_first_name
 
-        user.first_name = new_first_name
-        user.last_name = new_last_name
+        if new_last_name != '':
+          user.last_name = new_last_name
         user.save()
 
-        user_avatar = request.FILES['avatar']
+        user_avatar = request.FILES.get('avatar')
+        print user_avatar
+
         fs = FileSystemStorage()
-        user_avatar.name = 'user_' + request.user + '_' + user_avatar.name
+        user_avatar.name = 'user_' + str(request.user) + '_' + user_avatar.name
         filename = fs.save(user_avatar.name, user_avatar)
 
         person = Person.objects.get(id = request.user.id)

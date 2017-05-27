@@ -10,7 +10,8 @@
             <div class="row">
                 <div class="col-lg-3 col-md-3"></div>
                 <div class="col-lg-6 col-md-6">
-                    <form action="">
+                    <form action="{% url 'edit_profile' %}" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
                         <div class="form-group imagepreview" style="text-align:center; display:none">
                             <img id="preview" class="center-cropped" alt="" src="" height="128px" width="128px">
                         </div>
@@ -18,27 +19,24 @@
                             <div class="input-group">
                             <label class="input-group-btn">
                                 <span class="btn btn-default btn-block" style="border-radius: 4px;">
-                                <span id="add-t-image">Add profile</span>&hellip;
-                                <input type="file" name="topic_file" style="display: none;" required="">
+                                <span id="add-t-image">Add profile picture</span>&hellip;
+                                <input type="file" name="avatar" style="display: none;" required="">
                                 </span>
                             </label>
                             </div>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="firstname" placeholder="First Name" name="email">
+                            <input type="text" class="form-control" id="firstname" placeholder="First Name" name="first_name">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="lastname" placeholder="Last Name" name="email">
+                            <input type="text" class="form-control" id="lastname" placeholder="Last Name" name="last_name">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="username" placeholder="{{user}}" name="email">
+                            <input type="password" class="form-control" id="pwd" placeholder="Password" name="password1">
                         </div>
                         <div class="form-group">
-                            <input type="email" class="form-control" id="email" placeholder="{{email}}" name="email">
-                        </div>
-                        <div class="form-group">
-                            <input type="password" class="form-control" id="pwd" placeholder="Password" name="pwd">
-                        </div>
+                            <input type="password" class="form-control" id="pwd" placeholder="Retype Password" name="password2">
+                        </div>                        
                         <button type="submit" class="btn btn-primary">Save</button>
                     </form>
                 </div>
