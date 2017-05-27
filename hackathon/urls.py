@@ -9,4 +9,4 @@ urlpatterns = [
 	url(r'^admin/', admin.site.urls),
 	url(r'^registration/', include('registration.urls')),
 	url(r'^classroom/', include('classroom.urls')),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
