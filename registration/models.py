@@ -4,7 +4,7 @@ from django.db.models.signals import post_save
 
 
 class Person(models.Model):
-	user = models.OneToOneField(User)
+	user = models.OneToOneField(User, related_name = 'profile')
 	avatar = models.FileField(blank = True)
 
 	def __unicode__(self):
