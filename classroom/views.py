@@ -126,8 +126,9 @@ def post_on_topic(request, pk, topic_id):
 		if topic_post_file != None:
 			fs = FileSystemStorage()
 			topic_post_file.name = 'topic_post_' + str(topic) + '_' + topic_post_file.name
+			filetype = get_file_type(topic_post_file.name)
 			filename = fs.save(topic_post_file.name, topic_post_file)
-			Topic_Post.objects.create(topic=topic, user=request.user, title=title, content=content, file=filename)
+			Topic_Post.objects.create(topic=topic, user=request.user, title=title, content=content, file=filename, filetype=filetype)
 
 		else:
 			Topic_Post.objects.create(topic=topic, user=request.user, title=title, content=content)

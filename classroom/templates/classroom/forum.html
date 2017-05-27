@@ -57,7 +57,11 @@
 				<form action="{% url 'classroom:post_on_forum' classroom.pk %}?next={{ request.path }}" method="POST" enctype="multipart/form-data">
 					{% csrf_token %}
 					<div class="form-group">
+<<<<<<< HEAD
 						<input type="text" class="form-control" name="title" placeholder="Title" required>
+=======
+						<input type="text" class="form-control" name="title" placeholder="Title" required="">
+>>>>>>> de46467da62f06600347375ccfb034a068eca04b
 					</div>
 					<div class="form-group">
 						<textarea name="content" id="" cols="10" rows="3" class="form-control" placeholder="Content" required></textarea>
