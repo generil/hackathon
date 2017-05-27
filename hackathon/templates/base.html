@@ -1,22 +1,23 @@
 {% load static %}
 <html>
-    <head>
-        <title>
-            {% block title %}{% endblock%}
-        </title>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
-        <link rel="stylesheet" href="{% static 'css/app.css' %}">
-        {% block styles %}{% endblock %}
-    </head>
-    <body>
-        {% block login %}{% endblock %}
-        {% block home %}{% endblock %}
-        <script src="{% static 'js/jquery.js' %}"></script>
-        <script src="{% static 'js/bootstrap.js' %}"></script>
-        {% block js %}{% endblock %}
-    </body>
+<head>
+	<title>
+		{% block title %}{% endblock%}
+	</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+	<link rel="stylesheet" href="{% static 'css/app.css' %}"> {% block styles %}{% endblock %}
+</head>
+
+<body>
+	{% block login %}{% endblock %} {% block home %}{% endblock %}
+	<script src="{% static 'js/jquery.js' %}"></script>
+	<script src="{% static 'js/bootstrap.js' %}"></script>
+	{% block js %}{% endblock %}
+</body>
+
 </html>
