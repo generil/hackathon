@@ -1,19 +1,21 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="panel panel-default">
-    <div class="panel-heading" style="padding-bottom:5px; padding-top:5px;">
-        <h5 style="padding-top: 5px; padding-bottom: 5px; margin: 0"><a href="" class="topic-btn"> Topic </a>&nbsp;&nbsp;<small style="color:darkgray">Date</small></h5>
+{% for post in posts %}
+    <div class="panel panel-default">
+        <div class="panel-heading" style="padding-bottom:5px; padding-top:5px;">
+            <h5 style="padding-top: 5px; padding-bottom: 5px; margin: 0"><a href="" class="topic-btn">{{post.title}}</a>&nbsp;&nbsp;<small style="color:darkgray">{{post.date_created}}</small></h5>
+        </div>
+        <div class="panel-body">
+            <h3 style="margin-top:0px; font-weight:bold; word-wrap: break-word;"><a href="">{{post.content}}</a></h3>
+            <p style="margin-bottom:0px;"><a href="">{{post.user.username}} on {{post.classroom.name}}</a></p>
+        </div>
+        <div class="panel-footer">
+            <button class="btn btn-xs btn-primary">
+                <span class="glyphicon glyphicon-thumbs-up"></span>
+                <span> 0</span>
+            </button>
+        </div>
     </div>
-    <div class="panel-body">
-        <h3 style="margin-top:0px; font-weight:bold; word-wrap: break-word;"><a href="">Question</a></h3>
-        <p style="margin-bottom:0px;"><a href="">User</a></p>
-    </div>
-    <div class="panel-footer">
-        <button class="btn btn-xs btn-primary">
-            <span class="glyphicon glyphicon-thumbs-up"></span>
-            <span> 0</span>
-        </button>
-    </div>
-</div>
+{% endfor %}
 {% endblock %}
