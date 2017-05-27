@@ -2,5 +2,6 @@
 <ul class="nav nav-sidebar">
 	{% for record in records %}
 	<li><a href="{% url 'classroom:forum' record.classroom.pk %}">{{record.classroom.name}}</a></li>
+	<!-- <li><a href="#">{{record.classroom.name}}</a></li> -->
 	{% endfor %}
 </ul>
