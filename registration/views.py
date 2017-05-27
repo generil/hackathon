@@ -7,6 +7,7 @@ from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 
 from hackathon import views
+from models import User
 
 def log_in(request):
     if request.user.is_authenticated:	
@@ -32,14 +33,12 @@ def log_in(request):
 
 def sign_up(request):
     if request.user.is_authenticated:
-        return redirect('')
+        return redirect('home')
 
     context = {}
     data = {}
 
     if request.method == 'POST':
-        data['first_name'] = request.POST.get('first_name')
-        data['last_name'] = request.POST.get('last_name')
         data['username'] = request.POST.get('username')
         data['email'] = request.POST.get('email')
         data['password1'] = request.POST.get('password1')
@@ -48,14 +47,16 @@ def sign_up(request):
         dataCheck = user_integrityCheck(data)
 
         if dataCheck == True:
-            User.objects.get_or_create(first_name = data['first_name'],
-                last_name = data['last_name'], username = data['username'], password = data['password1'],
-                email = data['email'])
+            User.objects.create_user(
+            	username = data['username'], 
+            	password = data['password1'],
+            	email = data['email'])
             
-            user_auth = authenticate(username=data['username'], password=['password1'])
-            login(request, user_auth)
+            user = authenticate(username = data['username'], password = data['password1'])
+            print user
+            login(request, user)
             
-            return redirect('questions')
+            return redirect('home')
 
         else:
             context = dataCheck[1]
@@ -111,4 +112,4 @@ def edit_profile(request):
 def log_out(request):
   logout(request)
 
-  return redirect('sign_in')
+  return redirect('log_in')
