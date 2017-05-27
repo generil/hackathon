@@ -1,31 +1,71 @@
 {% extends "home.html" %}
 
 {% block content %}
+<ul class="nav nav-pills" style="margin-bottom: 20px;">
+    <li class="active"><a data-toggle="pill" href="#forum">Forums</a></li>
+    <li><a data-toggle="pill" href="#topic">Topics</a></li>
+</ul>
 
-<a href="{% url 'classroom:forum' classroom.pk %}">Forum</a><br>
-<a href="{% url 'classroom:topic' classroom.pk %}">Topics</a>
-
-
-<h3>POST</h3>
-{% if posts is None %}
-	<p>No posts</p>
-{% else %}
-	{% for post in posts %}
-		<p>Title: {{ post.title }}</p>
-		<p>Content: {{ post.content }}</p>
-		<p>Date: {{ post.date_created }}</p>
-		<p>Posted by: {{ post.user.username }}</p>
-		<p>Upvote: {{ post.upvote }}</p>
-		<br><br>
-	{% endfor %}
-{% endif %}
-
-<br><br>
-<form action="{% url 'classroom:post_on_forum' classroom.pk %}?next={{ request.path }}" method="POST">
-	{% csrf_token %}
-	<input type="text" name="title" placeholder="title">
-	<textarea name="content" id="" cols="10" rows="3" class="form-control" placeholder="post"></textarea>
-	<button type="submit">Submit</button>
-</form>
+<div class="tab-content">
+    <div id="forum" class="tab-pane fade in active">
+        {% if posts|length == 0 %}
+            <p>No posts</p>
+        {% else %}
+            <div class="row">
+                <div class="col-lg-8 col-lg-8">
+                    {% for post in posts %}
+                        <div class="panel panel-default">
+                            <div class="panel-heading" style="padding-bottom:5px; padding-top:5px;">
+                                <h5 style="padding-top: 5px; padding-bottom: 5px; margin: 0"><a href="" class="topic-btn"> Topic </a>&nbsp;&nbsp;<small style="color:darkgray">{{ post.date_created }}</small></h5>
+                            </div>
+                            <div class="panel-body">
+                                <h3 style="margin-top:0px; font-weight:bold; word-wrap: break-word;"><a href="">{{ post.title }}</a></h3>
+                                <p style="word-wrap: break-word">{{post.content}}</p>
+                                <p style="margin-bottom:0px;"><a href="">{{post.user.username}}</a></p>
+                            </div>
+                            <div class="panel-footer">
+                                <button class="btn btn-xs btn-primary">
+                                    <span class="glyphicon glyphicon-thumbs-up"></span>
+                                    <span> {{post.upvote}}</span>
+                                </button>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="col-lg-4 col-lg-4">
+                    <form action="{% url 'classroom:post_on_forum' classroom.pk %}?next={{ request.path }}" method="POST">
+                        {% csrf_token %}
+						<div class="form-group">
+							 <input type="text" class="form-control" name="title" placeholder="Title">
+						</div>
+						<div class="form-group">
+							 <textarea name="content" id="" cols="10" rows="3" class="form-control" placeholder="Content"></textarea>
+						</div>
+						<div class="form-group">
+							<label class="btn btn-primary btn-block" for="my-file-selector" style="margin-bottom:10px;">
+								<input id="my-file-selector" type="file" style="display:none;" onchange="$('#upload-file-info').html($(this).val());">
+								Attach File
+							</label>
+							<div style="text-align:center">
+								<small id="upload-file-info"></small>
+							</div>
+						</div>
+						<button class="btn btn-sm btn-default btn-block" type="submit">Submit</button>
+                    </form>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+    <div id="topic" class="tab-pane fade">
+        {% if topics.count == 0 %}
+            <p>No topics to show</p>
+        {% else %}
+            {% for topic in topics %}
+            <ul>
+                <li><a href="{% url 'classroom:topic_details' classroom.pk topic.pk %}">{{ topic }}</a></li>
+            </ul>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
 {% endblock %}
-

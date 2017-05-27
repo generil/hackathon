@@ -17,11 +17,16 @@ from registration.models import Person
 # Create your views here.
 
 def forum(request, pk):
+	if not request.user.is_authenticated:
+		return redirect('/')
+
 	classroom = get_object_or_404(Classroom, pk=pk)
 	posts = Forum_Post.objects.filter(classroom=classroom)
+	topics = Topic.objects.filter(classroom=classroom)
 	records = Record.objects.filter(user=request.user)
 	person = Person.objects.get(id = request.user.id)
 	context = {
+		'topics': topics,
 		'classroom': classroom,
 		'posts': posts,
 		'records': records,
