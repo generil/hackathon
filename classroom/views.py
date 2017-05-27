@@ -2,6 +2,8 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render, get_object_or_404, redirect
+from django.conf import settings
+from hackathon import views
 
 from .models import Classroom
 from .models import Topic
@@ -15,6 +17,8 @@ from .models import Record
 
 def add_classroom(request):
 	if request.method == "POST":
+<<<<<<< HEAD
+=======
 		name = request.POST.get('name')
 		c = Classroom.objects.create(name=name, creator=request.user)
 		Record.objects.create(user=request.user, classroom=c)
@@ -22,6 +26,7 @@ def add_classroom(request):
 		return redirect(reverse('forum', kwargs={'pk': c.pk}))
 
 	return render(request, 'classroom/add_classroom.html', context=context)
+>>>>>>> 511cb92ca6253c3262b5e0e7aafa2c6984bb0a82
 
 
 def forum(request, pk):
@@ -30,7 +35,7 @@ def forum(request, pk):
 	context = {
 		'posts': posts
 	}
-	return render(request, 'classroom/forum.html', context=context)
+	return render(request, 'forum.html', context=context)
 
 
 def topic(request, pk):
@@ -64,16 +69,3 @@ def topic_details(request, pk, topic_id):
 		'posts': posts
 	}
 	return render(request, 'classroom/topic_details.html', context=context)
-
-
-
-
-
-
-
-
-
-
-
-
-
