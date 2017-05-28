@@ -1,10 +1,18 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700,900');
+
 body {
 	padding-top: 50px;
+	font-family: 'Roboto', sans-serif;
 }
 
 .sub-header {
 	padding-bottom: 10px;
 	border-bottom: 1px solid #eee;
+}
+
+.navbar {
+	background-color: white;
+	box-shadow: 0px 0px 5px 0px #999
 }
 
 .navbar-fixed-top {
@@ -13,6 +21,10 @@ body {
 
 .sidebar {
 	display: none;
+}
+
+.side {
+	color: rgba(255, 255, 255, 0.7)
 }
 
 @media (min-width: 768px) {
@@ -27,8 +39,8 @@ body {
 		padding-top: 0px;
 		overflow-x: hidden;
 		overflow-y: auto;
-		background-color: #f5f5f5;
-		border-right: 1px solid #eee;
+		background-color: #222222;
+		/*border-right: 1px solid #eee;*/
 	}
 }
 
@@ -43,11 +55,21 @@ body {
 	padding-left: 20px;
 }
 
+/*.nav-sidebar:hover>a:hover {
+	background-color: #111;
+}*/
+
 .nav-sidebar>.active>a,
 .nav-sidebar>.active>a:hover,
 .nav-sidebar>.active>a:focus {
 	color: #fff;
-	background-color: #428bca;
+	font-weight: bold;
+	background-color: #ABCB38;
+}
+
+.nav > li > a:hover, .nav > li > a:focus {
+	background-color: #111;
+	color: white;	
 }
 
 .main {
