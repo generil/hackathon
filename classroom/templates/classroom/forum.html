@@ -90,8 +90,10 @@
 						</span>
 					</div>
 				</form>
+				<br>
+				<h5>{{classroom.name}} Members:</h5>
 				{% for member in members %}
-				<p>{{member.user}}</p>
+				<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img class="center-cropped" src="{{ member.user.profile.avatar.url }}" width="23px" height="23px" style="border:none; margin-top: 3; margin-bottom: 5;"> &nbsp;{{member.user}}</p>
 				{% endfor %}
 			</div>
 		</div>
