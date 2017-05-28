@@ -27,11 +27,13 @@ def forum(request, pk):
 	posts = Forum_Post.objects.filter(classroom=classroom)
 	records = Record.objects.filter(user=request.user)
 	person = Person.objects.get(id = request.user.id)
+	members = Record.objects.filter(classroom = classroom)
 	context = {
 		'classroom': classroom,
 		'posts': posts,
 		'records': records,
-		'person': person
+		'person': person,
+		'members': members,
 	}
 	return render(request, 'classroom/forum.html', context=context)
 
@@ -180,12 +182,14 @@ def add_member(request, pk):
 	classroom = get_object_or_404(Classroom, pk=pk)
 	posts = Forum_Post.objects.filter(classroom=classroom)
 	records = Record.objects.filter(user=request.user)
+	members = Record.objects.filter(classroom = classroom)
 	person = Person.objects.get(id = request.user.id)
 	context = {
 		'classroom': classroom,
 		'posts': posts,
 		'records': records,
-		'person': person
+		'person': person,
+		'members': members,
 	}
 
 	if request.method == "POST":
