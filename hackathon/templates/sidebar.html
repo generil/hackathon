@@ -2,9 +2,9 @@
 <!--if naay classroom-->
 {% if records|length > 0 %}
     <ul class="nav nav-sidebar">
-        <li><a href="/" style="font-weight:bold">FEED</a></li>
+        <li style="border-bottom: 1px solid grey"><a class="side" href="/" style="font-weight:bold"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;HOME</a></li>
         {% for record in records %}
-        <li><a href="{% url 'classroom:forum' record.classroom.pk %}">{{record.classroom.name}}</a></li>
+        <li><a class="side" href="{% url 'classroom:forum' record.classroom.pk %}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{record.classroom.name}}</a></li>
         {% endfor %}
     </ul>
 <!--if wala-->

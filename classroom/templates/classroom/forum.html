@@ -90,6 +90,9 @@
 						</span>
 					</div>
 				</form>
+				{% for member in members %}
+				<p>{{member.user}}</p>
+				{% endfor %}
 			</div>
 		</div>
     </div>
