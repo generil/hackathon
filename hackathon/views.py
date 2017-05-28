@@ -15,7 +15,7 @@ def home(request):
 	for record in records:
 		classroom_forum_posts = Forum_Post.objects.filter(classroom = record.classroom)
 		for post in classroom_forum_posts:
-			posts.append(post)
+			posts.insert(0, post)
 
 	person = Person.objects.get(id = request.user.id)
 	context = {

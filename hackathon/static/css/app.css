@@ -2,11 +2,11 @@
 
 body {
 	padding-top: 50px;
-	font-family: 'SF UI Text', 'Roboto', 'Segoe UI', 'Helvetica Neue', 'Helvetica', arial, sans-serif;
+	font-family: -apple-system, BlinkMacSystemFont, 'SF UI Text', 'Roboto', 'Segoe UI', 'Helvetica Neue', 'Helvetica', arial, sans-serif;
 }
 
 h1, h2, h3 {
-	font-family: 'SF UI Display', 'Roboto', 'Segoe UI', 'Helvetica Neue', 'Helvetica', arial, sans-serif;
+	font-family: -apple-system, BlinkMacSystemFont, 'SF UI Display', 'Roboto', 'Segoe UI', 'Helvetica Neue', 'Helvetica', arial, sans-serif;
 }
 
 .sub-header {
@@ -75,6 +75,12 @@ h1, h2, h3 {
 	background-color: #111;
 	color: white;	
 }
+
+.navbar-inverse .navbar-nav > li > a:hover,
+.navbar-inverse .navbar-nav > li > a:active, {
+	color: black;
+}
+
 
 .main {
 	padding: 20px;
