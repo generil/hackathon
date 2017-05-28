@@ -1,12 +1,12 @@
 {% extends "home.html" %}
 
 {% block content %}
-	<h1 style="font-weight:bold;font-size:4em;margin-top:0px;">{{topic.name}}</h1>
+	<h1 style="font-weight:900;font-size:4em;margin-top:0px;">{{topic.name}}</h1>
 
 	<div class="row" style="margin-top:20px;">
 		<div class="col-lg-8 col-md-8">
 			{% if posts|length == 0 %}
-			<h1>No posts</h1>
+				<h4><em>No topics</em></h4>
 			{% else %}
 				<div class="row">
 					{% for post in posts %}
