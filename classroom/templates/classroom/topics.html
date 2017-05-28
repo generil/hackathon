@@ -1,38 +1,35 @@
 {% extends "home.html" %}
 
 {% block content %}
-<ul class="nav nav-pills" style="margin-bottom: 20px;">
-    <li><a href="{% url 'classroom:forum' classroom.pk %}">Forums</a></li>
-    <li class="active"><a data-toggle="pill" href="#topic">Topics</a></li>
-</ul>
-
-<div class="tab-content">
-	<div id="topic" class="tab-pane fade in active">
-		<div class="row">
-			<div class="col-lg-8 col-md-8">
-				{% if topics|length == 0 %}
-					<h4><em>No topics</em></h4>
-				{% else %}
-					{% for topic in topics %}
-					<div class="panel panel-default">
-						<div class="panel-body" style="margin-top:0;margin-bottom:0">
-							<h3 style="margin-top:0;margin-bottom:0;font-weight:bold"><a href="{% url 'classroom:topic_details' classroom.pk topic.pk %}">{{ topic.name }}</a></h3>
-						</div>
+<div class="row">
+	<div class="col-lg-8 col-md-8">
+		<ul class="nav nav-pills" style="margin-bottom: 20px;">
+	    <li><a href="{% url 'classroom:forum' classroom.pk %}">Forums</a></li>
+	    <li class="active"><a data-toggle="pill" href="#topic">Topics</a></li>
+		</ul>
+		<div id="topic" class="tab-pane fade in active">
+			{% if topics|length == 0 %}
+				<h4><em>No topics</em></h4>
+			{% else %}
+				{% for topic in topics %}
+				<div class="panel panel-default">
+					<div class="panel-body" style="margin-top:0;margin-bottom:0">
+						<h3 style="margin-top:0;margin-bottom:0;font-weight:bold"><a href="{% url 'classroom:topic_details' classroom.pk topic.pk %}">{{ topic.name }}</a></h3>
 					</div>
-					{% endfor %}
-				{% endif %}
-			</div>
-			<div class="col-lg-4 col-md-4">
-				<p style="font-weight:bold">ADD NEW TOPIC IN <span style="font-weight:900; color: dimgray">{{classroom.name.upper}}</span></p>
-				<form action="{% url 'classroom:add_topic' classroom.pk %}" method="POST">
-					{% csrf_token %}
-					<div class="form-group">
-						<input type="text"  class="form-control" name="name" placeholder="Title" required>
-					</div>
-					<button class="btn btn-sm btn-default btn-block" type="submit">Add</button>
-				</form>
-			</div>
+				</div>
+				{% endfor %}
+			{% endif %}
 		</div>
-    </div>
+	</div>
+	<div class="col-lg-4 col-md-4">
+		<p style="font-weight:bold">ADD NEW TOPIC IN <span style="font-weight:900; color: dimgray">{{classroom.name.upper}}</span></p>
+		<form action="{% url 'classroom:add_topic' classroom.pk %}" method="POST">
+			{% csrf_token %}
+			<div class="form-group">
+				<input type="text"  class="form-control" name="name" placeholder="Title" required>
+			</div>
+			<button class="btn btn-sm btn-default btn-block" type="submit">Add</button>
+		</form>
+	</div>
 </div>
 {% endblock %}
