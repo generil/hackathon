@@ -3,13 +3,18 @@
 {% block content %}
 <div class="row">
 	<div class="col-lg-8 col-md-8">
-		<ul class="nav nav-pills" style="margin-bottom: 20px;">
+		<div style="text-align:center">
+			<h1 style="margin-top:0px; font-weight:900;font-size:3em;">{{classroom.name}}</h1>
+		</div>
+		<ul class="nav nav-pills" style="display: flex; justify-content: center; margin-bottom: 20px;">
 	    <li><a href="{% url 'classroom:forum' classroom.pk %}">Forums</a></li>
 	    <li class="active"><a data-toggle="pill" href="#topic">Topics</a></li>
 		</ul>
 		<div id="topic" class="tab-pane fade in active">
 			{% if topics|length == 0 %}
-				<h4><em>No topics</em></h4>
+				<div style="text-align: center">
+					<h4>No topics</h4>
+				</div>
 			{% else %}
 				{% for topic in topics %}
 				<div class="panel panel-default">

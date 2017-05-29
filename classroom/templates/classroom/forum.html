@@ -3,14 +3,19 @@
 {% block content %}
 <div class="row">
 	<div class="col-lg-8 col-md-8">
-		<ul class="nav nav-pills" style="margin-bottom: 20px;">
+		<div style="text-align:center">
+			<h1 style="margin-top:0px; font-weight:900;font-size:3em;">{{classroom.name}}</h1>
+		</div>
+		<ul class="nav nav-pills" style="display: flex; justify-content: center; margin-bottom: 20px;">
     	<li class="active"><a data-toggle="pill" href="#forum">Forums</a></li>
     	<li><a href="{% url 'classroom:topic' classroom.pk %}">Topics</a></li>
 		</ul>
 		<div class="tab-content">
     	<div id="forum" class="tab-pane fade in active">
 				{% if posts|length == 0 %}
-				<h4><em>No posts</em></h4>
+				<div style="text-align:center">
+					<h4>No posts</h4>
+				</div>
 				{% else %}
 					<div class="row">
 						{% for post in posts %}
@@ -22,16 +27,17 @@
 								</div>
 								<div class="panel-body">
 									<h3 style="margin-top:0px; font-weight:bold; word-wrap: break-word;">{{ post.title }}</h3>
-									<p style="word-wrap: break-word">{{post.content}}</p><br>
+									<p style="word-wrap: break-word">{{post.content}}</p>
 									<!-- {% if post.file != '' %} -->
 									<p><a href="{{post.file.url}}">
 									{% if post.filetype != 'jpg' %}
-									<img src="/storage/attachment.png" width="50px" height="50px" style="border:none; margin-top: -10; margin-bottom: -7;">
+									<img src="/storage/attachment.png" width="50px" height="50px" style="border:none; margin-top: -5; margin-bottom: -7;">
 									<br><br>
-										<small>{{ post.file.name }}</small>
+									<small>{{ post.file.name }}</small>
 									</a>
 									{% else %}
 									<img src="{{ post.file.url }}"  style="border:none; margin-top: 3; margin-bottom: 5; max-width: 500; max-height: 500">
+									<br><br>
 									<small>{{ post.file.name }}</small>
 									</a>
 									{% endif %}
@@ -46,7 +52,7 @@
     </div>
 	</div>
 	<div class="col-lg-4 col-md-4">
-		<p style="font-weight:bold">POST TO <span style="font-weight:900; color: dimgray">{{classroom.name.upper}}</p>
+		<p style="font-weight:bold">POST TO <span style="font-weight:900; color: dimgray">{{classroom.name.upper}}</span></p>
 		<form action="{% url 'classroom:post_on_forum' classroom.pk %}?next={{ request.path }}" method="POST" enctype="multipart/form-data">
 			{% csrf_token %}
 			<div class="form-group">
@@ -67,23 +73,22 @@
 			<button class="btn btn-sm btn-default btn-block" type="submit">POST</button>
 		</form>
 		<hr>
-		{% if error %}
-			<p style="color: red;">{{error}}</p>
-		{% elif success %}
-			<p style="color: green;">{{success}}</p>
-		{% endif %}
 		<p style="font-weight:bold">ADD MEMBER</p>
-		<form action="{% url 'classroom:add_member' classroom.pk %}" method="POST">
+		<form action="{% url 'classroom:add_member' classroom.pk %}" method="POST" style="margin-bottom:5px;">
 			{% csrf_token %}
 			<div class="input-group">
-				<span class="input-group-addon" id="sizing-addon2">@</span>
+				<span class="input-group-addon" id="sizing-addon2"><span class="glyphicon glyphicon-user"></span></span>
 				<input type="text" class="form-control" placeholder="Add your friends" name="username" required>
 				<span class="input-group-btn">
 					<button class="btn btn-primary" type="submit">Add</button>
 				</span>
 			</div>
 		</form>
-		<br>
+		{% if error %}
+			<small style="color: red;">{{error}}</small><br>
+		{% elif success %}
+			<small style="color: green;">{{success}}</small><br>
+		{% endif %}
 		<h5>{{classroom.name}} Members:</h5>
 		{% for member in members %}
 		<p>&nbsp;&nbsp;&nbsp;&nbsp;<img class="center-cropped" src="{{ member.user.profile.avatar.url }}" width="23px" height="23px" style="border:none; margin-top: 3; margin-bottom: 5;"> &nbsp;{{member.user}}</p>

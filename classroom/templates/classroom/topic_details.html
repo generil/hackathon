@@ -3,9 +3,13 @@
 {% block content %}
 	<div class="row">
 		<div class="col-lg-8 col-md-8">
-			<h1 style="font-weight:900;font-size:3em;margin-top:0px;">{{topic.name}}</h1>
+			<div style="text-align:center">
+				<h1 style="font-weight:900;font-size:3em;margin-top:0px;">{{topic.name}}</h1>
+			</div>
 			{% if posts|length == 0 %}
-				<h4><em>No posts yet</em></h4>
+				<div style="text-align: center">
+					<h4>No posts yet</h4>
+				</div>
 			{% else %}
 				<div class="row">
 					{% for post in posts %}
@@ -17,7 +21,7 @@
 							</div>
 							<div class="panel-body">
 								<h3 style="margin-top:0px; font-weight:bold; word-wrap: break-word;">{{ post.title }}</h3>
-								<p style="word-wrap: break-word">{{post.content}}</p><br>
+								<p style="word-wrap: break-word">{{post.content}}</p>
 								<!-- {% if post.file != '' %} -->
 								<p><a href="{{post.file.url}}">
 								{% if post.filetype != 'jpg' %}
@@ -48,7 +52,7 @@
 			{% endif %}
 		</div>
 		<div class="col-lg-4 col-md-4">
-			<p style="font-weight:bold">POST TO {{topic.name.upper}}</p>
+			<p style="font-weight:bold">POST TO <span style="font-weight:900; color: dimgray">{{topic.name.upper}}</span></p>
 			<form action="{% url 'classroom:post_on_topic' classroom.pk topic.pk %}" method="POST" enctype="multipart/form-data">
 				{% csrf_token %}
 				<div class="form-group">

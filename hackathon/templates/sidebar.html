@@ -5,9 +5,9 @@
         <li style="border-bottom: 1px solid grey"><a class="side" href="/" style="font-weight:bold"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;HOME</a></li>
         {% for record in records %}
             {% if classroom.pk == record.classroom.pk %}
-               <li><a class="side" href="{% url 'classroom:forum' record.classroom.pk %}" style="background-color:#ABCB38; color: #fff; font-weight: bold;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{record.classroom.name}}</a></li>
+               <li><a class="side" href="{% url 'classroom:forum' record.classroom.pk %}" style="background-color:#ABCB38; color: #fff; font-weight: bold;">{{record.classroom.name}}</a></li>
             {% else %}
-               <li><a class="side" href="{% url 'classroom:forum' record.classroom.pk %}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{record.classroom.name}}</a></li>
+               <li><a class="side" href="{% url 'classroom:forum' record.classroom.pk %}">{{record.classroom.name}}</a></li>
             {% endif %}
         {% endfor %}
     </ul>

@@ -33,22 +33,27 @@
 							<div class="thumbnail">
 								<div class="caption">
 									<div class="container-fluid">
-										<h2>Sign Up</h2>
+										<h2 style="font-weight:900">Sign Up</h2>
 										<form action="{% url 'sign_up' %}" method="POST">
 											{% csrf_token %}
 											<div class="form-group">
 													<div class="form-group">
 														<input type="text" class="form-control" id="username" placeholder="Username" name="username">
 													</div>
+
 													<div class="form-group">
 														<input type="email" class="form-control" id="email" placeholder="Email Address" name="email">
 													</div>
+
 													<div class="form-group">
 														<input type="password" class="form-control" id="pwd" placeholder="Password" name="password1">
 													</div>
 													<div class="form-group">
 														<input type="password" class="form-control" id="pwd" placeholder="Retype Password" name="password2">
 													</div>
+													<small style="color:red;">{{username_error}}</small>
+													<small style="color:red;">{{email_error}}</small>
+													<small style="color:red;">{{password_error}}</small><br>
 													<button type="submit" class="btn btn-primary">Sign Up</button>
 												</form>
 											</div>

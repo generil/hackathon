@@ -75,7 +75,7 @@ def user_integrityCheck(data):
     errors = {}
 
     if len(User.objects.filter(username = data.get('username'))) > 0:
-        errors['username_error'] = "An account has this Username already. Pick another one."
+        errors['username_error'] = "Username is already taken. Please come up with another one."
 
         return False, errors
 
@@ -87,6 +87,8 @@ def user_integrityCheck(data):
     if data.get('password1') != data.get('password2'):
         errors['password_error'] = "Passwords do not match"
 
+        return False, errors
+        
     return True
 
 

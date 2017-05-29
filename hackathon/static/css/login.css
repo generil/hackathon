@@ -21,6 +21,47 @@ html,
 body {
 	height: 100%;
 	background-color: #333;
+	background: linear-gradient(53deg, #07020d, #1b2021, #465362);
+  background-size: 800% 800%;
+  -webkit-animation: AnimationName 59s ease infinite;
+  -moz-animation: AnimationName 59s ease infinite;
+  animation: AnimationName 59s ease infinite;
+}
+
+@-webkit-keyframes AnimationName {
+  0% {
+    background-position: 0% 90%
+  }
+  50% {
+    background-position: 100% 11%
+  }
+  100% {
+    background-position: 0% 90%
+  }
+}
+
+@-moz-keyframes AnimationName {
+  0% {
+    background-position: 0% 90%
+  }
+  50% {
+    background-position: 100% 11%
+  }
+  100% {
+    background-position: 0% 90%
+  }
+}
+
+@keyframes AnimationName {
+  0% {
+    background-position: 0% 90%
+  }
+  50% {
+    background-position: 100% 11%
+  }
+  100% {
+    background-position: 0% 90%
+  }
 }
 
 body {
@@ -33,10 +74,7 @@ body {
 	display: table;
 	width: 100%;
 	height: 100%;
-	/* For at least Firefox */
-	min-height: 100%;
-	-webkit-box-shadow: inset 0 0 100px rgba(0, 0, 0, .5);
-	box-shadow: inset 0 0 100px rgba(0, 0, 0, .5);
+	
 }
 
 .site-wrapper-inner {
