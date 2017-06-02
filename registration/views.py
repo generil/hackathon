@@ -56,7 +56,7 @@ def sign_up(request):
             created.save()
             person = Person.objects.get(id = created.id)
             person.avatar = "default-user-avatar.png"
-            # person.avatar.url = "/storage/default-user-avatar.png"
+            
             person.save()
             
             user = authenticate(username = data['username'], password = data['password1'])
